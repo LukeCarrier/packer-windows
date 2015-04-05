@@ -1,0 +1,56 @@
+#!/bin/sh
+
+#
+# Vagrant Windows box factory
+#
+# @author Luke Carrier <luke@carrier.im>
+# @copyright 2015 Luke Carrier
+# @license GPL v3
+#
+
+ROOT_DIR="$(dirname $(readlink -fn $0))"
+
+# Exit statuses, modelled after sysexits.h
+EX_USAGE=64
+EX_UNAVAILABLE=69
+EX_CANTCREATE=73
+
+# Source configuration and dependencies
+. "${ROOT_DIR}/make-vm.conf"
+. "${ROOT_DIR}/functions"
+
+enable_error_trap
+
+# Parse CLI arguments
+eval set -- "$(getopt -o "t:" --long "template:" -- "$@")"
+while true; do
+    case "$1" in
+        -t|--template) TEMPLATE="$2" ; shift 2 ;;
+        *            ) break         ;         ;;
+    esac
+done
+
+# Set up some other state before sanity checks
+TEMPLATE_FILE="${ROOT_DIR}/templates/${TEMPLATE}/template.json"
+
+# Ensure configuration and CLI arguments are relatively sane
+ensure_sane_env
+ensure_sane_args
+
+# Put the Packer utilities on our path to save typing
+PATH="${PACKER_PATH}:${PATH}"
+
+# Set Packer's cache directory outside of the build directory for faster builds
+export PACKER_CACHE_DIR="${ROOT_DIR}/cache"
+
+# Build it
+BUILD_DIR="${ROOT_DIR}/builds/${TEMPLATE}"
+if [ -d "$BUILD_DIR" ]; then
+    echo "[!] Build directory for "${TEMPLATE}" already exists; aborting"
+    echo "[!] Delete or move aside the build directory to continue"
+    exit $EX_CANTCREATE
+fi
+mkdir -p "$BUILD_DIR"
+pushd "$BUILD_DIR"
+packer build "$TEMPLATE_FILE"
+popd

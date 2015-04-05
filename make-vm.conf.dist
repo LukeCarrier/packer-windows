@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#
+# Vagrant Windows box factory
+#
+# @author Luke Carrier <luke@carrier.im>
+# @copyright 2015 Luke Carrier
+# @license GPL v3
+#
+
+ROOT_DIR="$(dirname $(readlink -fn $0))"
+
+# Path to the Packer utilities, extracted from the archive for your platform
+export PACKER_PATH="${ROOT_DIR}/tools/packer_0.7.5_linux_amd64"
