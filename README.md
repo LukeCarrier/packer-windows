@@ -36,9 +36,9 @@ Installation of a Packer build environment is simple, but a little messy:
    [here](https://github.com/packer-community/packer-windows-plugins/releases)
 4. Extract the binaries from the Windows plugins release into the same directory
    as Packer itself. This sucks, but there's no way to set Packer's plugin path
-   yet.
+   yet
 5. Copy ```make-vm.conf.dist``` to ```make-vm.conf``` and alter the value of
-   ```PACKER_PATH``` to suit.
+   ```PACKER_PATH``` to suit
 6. ???
 7. Profit (or don't, it's still Windows)
 
