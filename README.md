@@ -15,8 +15,6 @@ on Windows. It builds Vagrant boxes for you.
 [Packer](https://www.packer.io/) downloads the required ISO files to the cache,
 creates a floppy image containing some key bootstrap files, creates the VM using
 the ```virtualbox-iso``` builder, then launches the VM with the floppy attached.
-An HTTP server will now be running on the host machine to allow access to script
-files necessary to perform the remaining manual installation.
 
 At this point, Windows boots, locates the answer file (```Autounattend.xml```)
 specified in the Packer configuration and performs an unattended installation.
