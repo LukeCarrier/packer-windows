@@ -15,7 +15,10 @@
             "winrm_wait_timeout": "10m",
             "floppy_files":
             [
-                "../../templates/2008_r2_64/Autounattend.xml"
+                "../../templates/2008_r2_64/Autounattend.xml",
+                "../../scripts/uac.bat",
+                "../../scripts/vboxtools.bat",
+                "../../scripts/winrm.bat"
             ],
             "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer\"",
             "shutdown_timeout": "1h",

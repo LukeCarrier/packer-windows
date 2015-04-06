@@ -80,16 +80,26 @@
                     <PlainText>true</PlainText>
                 </Password>
             </AutoLogon>
-            <!--
-                <FirstLogonCommands>
-                    <SynchronousCommand wcm:action="add">
-                        <CommandLine>cmd.exe /c a:\00-run-all-scripts.cmd</CommandLine>
-                        <Description>Run all *.bat and *.cmd scripts on drive A:</Description>
-                        <Order>1</Order>
-                        <RequiresUserInput>true</RequiresUserInput>
-                    </SynchronousCommand>
-                </FirstLogonCommands>
-            -->
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c a:\vboxtools.bat</CommandLine>
+                    <Description>Install guest additions</Description>
+                    <Order>1</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c a:\uac.bat</CommandLine>
+                    <Description>Disable UAC</Description>
+                    <Order>2</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c a:\winrm.bat</CommandLine>
+                    <Description>Enable WinRM</Description>
+                    <Order>3</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+            </FirstLogonCommands>
         </component>
     </settings>
     <settings pass="specialize">
