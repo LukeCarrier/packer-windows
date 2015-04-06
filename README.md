@@ -10,6 +10,38 @@ This project was born out of a last ditch attempt to escape the shackles of
 Windows and go back to working on a "nice" operating system whilst still testing
 on Windows. It builds Vagrant boxes for you.
 
+## How it works
+
+[Packer](https://www.packer.io/) downloads the required ISO files to the cache,
+creates a floppy image containing some key bootstrap files, creates the VM using
+the ```virtualbox-iso``` builder, then launches the VM with the floppy attached.
+An HTTP server will now be running on the host machine to allow access to script
+files necessary to perform the remaining manual installation.
+
+At this point, Windows boots, locates the answer file (```Autounattend.xml```)
+specified in the Packer configuration and performs an unattended installation.
+
+Upon rebooting, the machine executes a bootstrap script which sources files from
+the HTTP server, allowing it to perform the remainder of its installation tasks
+automatically.
+
+## Setting up your environment
+
+Installation of a Packer build environment is simple, but a little messy:
+
+1. Grab a release for your architecture [here](https://packer.io/downloads.html)
+2. Extract the release and drop it into a subdirectory of the ```tools```
+   directory
+3. Grab a release of the Windows plugins from
+   [here](https://github.com/packer-community/packer-windows-plugins/releases)
+4. Extract the binaries from the Windows plugins release into the same directory
+   as Packer itself. This sucks, but there's no way to set Packer's plugin path
+   yet.
+5. Copy ```make-vm.conf.dist``` to ```make-vm.conf``` and alter the value of
+   ```PACKER_PATH``` to suit.
+6. ???
+7. Profit (or don't, it's still Windows)
+
 ## Building a box
 
 Boxes are identified by the names of their directories under ```templates```. To
