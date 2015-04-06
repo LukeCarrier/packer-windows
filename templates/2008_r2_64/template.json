@@ -24,9 +24,17 @@
             "shutdown_timeout": "1h",
             "vboxmanage":
             [
-                ["modifyvm", "{{.Name}}", "--memory", "1024"],
+                ["modifyvm", "{{.Name}}", "--memory", "2048"],
                 ["modifyvm", "{{.Name}}", "--cpus",   "2"]
             ]
+        }
+    ],
+    "post-processors":
+    [
+        {
+            "type": "vagrant",
+            "output": "windows_2008_r2_{{.Provider}}.box",
+            "vagrantfile_template": "../../templates/2008_r2_64/vagrantfile.template"
         }
     ]
 }
