@@ -22,8 +22,8 @@ At this point, Windows boots, locates the answer file (```Autounattend.xml```)
 specified in the Packer configuration and performs an unattended installation.
 
 Upon rebooting, the machine executes a bootstrap script which sources files from
-the HTTP server, allowing it to perform the remainder of its installation tasks
-automatically.
+the floppy disk in order to execute the first logon commands as indicated in the
+UI.
 
 ## Setting up your environment
 
