@@ -19,6 +19,3 @@ call winrm set winrm/config/listener?Address=*+Transport=HTTP @{Port="5985"}
 call winrm set winrm/config/service/auth @{Basic="true"}
 
 sc config WinRM start= auto
-
-timeout 5
-sc query winrm
