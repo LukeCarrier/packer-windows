@@ -20,6 +20,7 @@
                 "../../scripts/uac.bat",
                 "../../scripts/updates.bat",
                 "../../scripts/vboxtools.bat",
+                "../../scripts/nfs.bat",
                 "../../scripts/winrm.bat"
             ],
             "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer\"",
