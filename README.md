@@ -36,16 +36,21 @@ Installation of a Packer build environment is simple, but a little messy:
    as Packer itself. This sucks, but there's no way to set Packer's plugin path
    yet
 5. Copy ```make-vm.conf.dist``` to ```make-vm.conf``` and alter the value of
-   ```PACKER_PATH``` to suit
-6. ???
-7. Profit (or don't, it's still Windows)
+   ```PACKER_PATH``` (and on Windows, ```VIRTUALBOX_PATH```) to suit your
+   environment
 
 ## Building a box
 
 Boxes are identified by the names of their directories under ```templates```. To
 build one, you'll want to execute a command along the lines of the following:
 
-    $ ./make-vm --template 2008_r2_64
+### On Linux
+
+    $ ./make-vm.sh --template 2008_r2_64
+
+### On Windows
+
+	> powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
 
 ## A note on ISOs
 
