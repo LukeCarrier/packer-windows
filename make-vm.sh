@@ -15,11 +15,47 @@ EX_USAGE=64
 EX_UNAVAILABLE=69
 EX_CANTCREATE=73
 
-# Source configuration and dependencies
-. "${ROOT_DIR}/make-vm.conf"
-. "${ROOT_DIR}/functions"
+# Trap an error and exit cleanly.
+error_trap() {
+    echo " "
+    echo "$0: an error occurred during the execution of an action; aborting"
+    echo " "
+    exit 69
+}
+
+# Disable error trapping.
+#
+# Don't forget to re-enable it!
+disable_error_trap() {
+    trap - 1 2 3 15 ERR
+}
+
+# (Re-)enable error trapping.
+enable_error_trap() {
+    trap error_trap 1 2 3 15 ERR
+}
+
+# Ensure arguments are sane
+ensure_sane_args() {
+    if [ ! -f "$TEMPLATE_FILE" ]; then
+        echo "[!] Template "${TEMPLATE}" does not exist in the templates directory"
+        echo "[!] Did you type it correctly?"
+    fi
+}
+
+# Ensure environment is sane
+ensure_sane_env() {
+    if [ ! -d "$PACKER_PATH" ]; then
+        echo "[!] PACKER_PATH does not exist"
+        echo "[!] Download the Packer utilities and update make-vm.conf"
+        exit $EX_UNAVAILABLE
+    fi
+}
 
 enable_error_trap
+
+# Source configuration and dependencies
+. "${ROOT_DIR}/make-vm.sh.conf"
 
 # Parse CLI arguments
 eval set -- "$(getopt -o "t:" --long "template:" -- "$@")"
