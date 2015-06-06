@@ -27,17 +27,17 @@ UI.
 
 Installation of a Packer build environment is simple, but a little messy:
 
-1. Grab a release for your architecture [here](https://packer.io/downloads.html)
-2. Extract the release and drop it into a subdirectory of the ```tools```
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Grab a release for your architecture [here](https://packer.io/downloads.html)
+3. Extract the release and drop it into a subdirectory of the ```tools```
    directory
-3. Grab a release of the Windows plugins from
+4. Grab a release of the Windows plugins from
    [here](https://github.com/packer-community/packer-windows-plugins/releases)
-4. Extract the binaries from the Windows plugins release into the same directory
+5. Extract the binaries from the Windows plugins release into the same directory
    as Packer itself. This sucks, but there's no way to set Packer's plugin path
    yet
-5. Copy ```make-vm.conf.dist``` to ```make-vm.conf``` and alter the value of
-   ```PACKER_PATH``` (and on Windows, ```VIRTUALBOX_PATH```) to suit your
-   environment
+6. Copy ```make-vm.conf.dist``` to ```make-vm.conf``` and alter the value of
+   ```PACKER_PATH``` to suit
 
 ## Building a box
 
