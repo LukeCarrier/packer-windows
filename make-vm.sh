@@ -55,7 +55,7 @@ ensure_sane_env() {
 enable_error_trap
 
 # Source configuration and dependencies
-. "${ROOT_DIR}/make-vm.sh.conf"
+. "${ROOT_DIR}/make-vm.conf.sh"
 
 # Parse CLI arguments
 eval set -- "$(getopt -o "t:" --long "template:" -- "$@")"

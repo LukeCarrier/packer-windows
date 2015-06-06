@@ -1,6 +1,6 @@
 # Build environment configuration
 /make-vm.conf.ps1
-/make-vm.sh.conf
+/make-vm.conf.sh
 /tools/*
 
 # Built VM images
