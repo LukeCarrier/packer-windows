@@ -50,7 +50,7 @@ Ensure-EnvironmentSane
 $env:Path = "${PACKER_PATH};${VIRTUALBOX_PATH};${env:Path}"
 
 # Set Packer's cache directory outside of the build directory for faster builds
-$PACKER_CACHE_DIR = "${ROOT_DIR}\cache"
+$env:PACKER_CACHE_DIR = "${ROOT_DIR}\cache"
 
 # Build it
 $BUILD_DIR = "${ROOT_DIR}\builds\${TEMPLATE}"
