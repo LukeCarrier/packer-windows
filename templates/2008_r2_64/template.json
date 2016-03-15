@@ -13,26 +13,22 @@
             "winrm_username": "vagrant",
             "winrm_password": "vagrant",
             "winrm_wait_timeout": "10m",
-            "floppy_files":
-            [
+            "floppy_files": [
                 "../../templates/2008_r2_64/Autounattend.xml",
-                "../../scripts/pspolicy.bat",
-                "../../scripts/uac.bat",
-                "../../scripts/updates.bat",
-                "../../scripts/vboxtools.bat",
-                "../../scripts/winrm.bat"
+                "../../scripts/core/pspolicy.bat",
+                "../../scripts/core/uac.bat",
+                "../../scripts/core/updates.bat",
+                "../../scripts/core/winrm.bat"
             ],
             "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer\"",
             "shutdown_timeout": "1h",
-            "vboxmanage":
-            [
+            "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "2048"],
                 ["modifyvm", "{{.Name}}", "--cpus",   "2"]
             ]
         }
     ],
-    "post-processors":
-    [
+    "post-processors": [
         {
             "type": "vagrant",
             "output": "windows_2008_r2_{{.Provider}}.box",
