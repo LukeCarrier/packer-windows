@@ -88,12 +88,6 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c a:\uac.bat</CommandLine>
-                    <Description>Disable UAC</Description>
-                    <Order>2</Order>
-                    <RequiresUserInput>true</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c a:\updates.bat</CommandLine>
                     <Description>Configure Windows Update</Description>
                     <Order>4</Order>

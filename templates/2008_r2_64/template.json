@@ -17,7 +17,6 @@
             "floppy_files": [
                 "../../templates/2008_r2_64/Autounattend.xml",
                 "../../scripts/core/pspolicy.bat",
-                "../../scripts/core/uac.bat",
                 "../../scripts/core/updates.bat",
                 "../../scripts/core/winrm.bat"
             ],
