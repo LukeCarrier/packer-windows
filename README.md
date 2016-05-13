@@ -14,9 +14,9 @@ on Windows. It builds Vagrant boxes for you.
 
 [Packer](https://www.packer.io/) downloads the required ISO files to the cache,
 creates a floppy image containing some key bootstrap files, creates the VM using
-the ```virtualbox-iso``` builder, then launches the VM with the floppy attached.
+the `virtualbox-iso` builder, then launches the VM with the floppy attached.
 
-At this point, Windows boots, locates the answer file (```Autounattend.xml```)
+At this point, Windows boots, locates the answer file (`Autounattend.xml`)
 specified in the Packer configuration and performs an unattended installation.
 
 Upon rebooting, the machine executes a bootstrap script which sources files from
@@ -27,40 +27,45 @@ UI.
 
 Installation of a Packer build environment is simple, but a little messy:
 
-1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-2. Grab a release for your architecture [here](https://packer.io/downloads.html)
-3. Extract the release and drop it into a subdirectory of the ```tools```
-   directory
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+2. Grab a release for your architecture
+   [here](https://packer.io/downloads.html).
+3. Extract the release and drop it into a subdirectory of the `tools` directory.
+   directory.
 
 ### On Linux
 
-Copy ```make-vm.conf.sh.dist``` to ```make-vm.conf.sh``` and alter the value of
-```PACKER_PATH``` to suit.
+Copy `make-vm.conf.sh.dist` to `make-vm.conf.sh` and alter the value of
+`PACKER_PATH` to suit.
 
 ### On Windows
 
-Copy ```make-vm.conf.ps1.dist``` to ```make-vm.conf.ps1``` and alter the value
-of ```PACKER_PATH``` to suit.
+Copy `make-vm.conf.ps1.dist` to `make-vm.conf.ps1` and alter the value of
+`PACKER_PATH` to suit.
 
 ## Building a box
 
-Boxes are identified by the names of their directories under ```templates```. To
+Boxes are identified by the names of their directories under `templates`. To
 build one, you'll want to execute a command along the lines of the following:
 
 ### On Linux
 
-    $ ./make-vm.sh --template 2008_r2_64
+```
+$ ./make-vm.sh --template 2008_r2_64
+```
 
 ### On Windows
 
-	> powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
+```
+> powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
+```
 
 ## A note on ISOs
 
 By default, this project uses the free trial Windows Server trial ISOs provided
 by Microsoft. If you wish to use an activated copy, you can do so by editing the
-```iso_url``` and ```iso_checksum``` fields in the ```template.json``` files and
-altering ```Autounattend.xml``` accordingly.
+`iso_url` and `iso_checksum` fields in the `template.json` files and
+altering `Autounattend.xml` accordingly.
 
 The default ISOs are as follows:
 
