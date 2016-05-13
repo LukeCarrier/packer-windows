@@ -8,6 +8,7 @@
 
 # Parse CLI arguments
 Param(
+    [Parameter(Mandatory=$true)]
     [String] $Template
 )
 
