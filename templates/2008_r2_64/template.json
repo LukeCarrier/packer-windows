@@ -2,7 +2,7 @@
     "builders": [
         {
             "vm_name": "2008_r2_64",
-            "type": "virtualbox-windows-iso",
+            "type": "virtualbox-iso",
             "format": "ova",
             "guest_os_type": "Windows2008_64",
             "boot_wait": "2m",
@@ -10,9 +10,10 @@
             "iso_checksum": "4263be2cf3c59177c45085c0a7bc6ca5",
             "iso_checksum_type": "md5",
             "guest_additions_mode": "attach",
+            "communicator": "winrm",
             "winrm_username": "vagrant",
             "winrm_password": "vagrant",
-            "winrm_wait_timeout": "10m",
+            "winrm_timeout": "10m",
             "floppy_files": [
                 "../../templates/2008_r2_64/Autounattend.xml",
                 "../../scripts/core/pspolicy.bat",
