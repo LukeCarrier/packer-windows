@@ -60,6 +60,18 @@ $ ./make-vm.sh --template 2008_r2_64
 > powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
 ```
 
+## Modifying answer files
+
+Answer files are easiest to edit in the Windows System Image Manager. See
+[TechNet](https://technet.microsoft.com/en-GB/library/hh825494.aspx) for
+detailed installation instructions.
+
+Be sure to check that WSIM hasn't made a mess of the XML file -- just fire up a
+text editor and check the line endings and indentation and remove any
+installation source information before checking in changes. It particularly
+enjoys obscuring cleartext passwords, which is unhelpful in an open source
+environment.
+
 ## A note on ISOs
 
 By default, this project uses the free trial Windows Server trial ISOs provided
