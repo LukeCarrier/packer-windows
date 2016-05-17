@@ -21,7 +21,7 @@
                 "../../scripts/core/updates.bat",
                 "../../scripts/core/winrm.bat"
             ],
-            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer\"",
+            "shutdown_command": "C:\\Windows\\System32\\Sysprep\\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /shutdown",
             "shutdown_timeout": "1h",
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "2048"],
