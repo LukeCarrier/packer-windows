@@ -22,7 +22,7 @@ $ERROR_BUSY          = 167
 # Ensure arguments are sane
 function Ensure-ArgumentsSane() {
     if (!(Test-Path -PathType Leaf $templateFile)) {
-        Write-Host "[!] Template "${TEMPLATE}" does not exist in the templates directory"
+        Write-Host "[!] template `"${template}`" does not exist in the templates directory"
         Write-Host "[!] Did you type it correctly?"
         Exit $ERROR_BAD_COMMAND
     }
@@ -56,7 +56,7 @@ $env:PACKER_CACHE_DIR = "${rootDir}\cache"
 # Build it
 $buildDir = "${rootDir}\builds\$($template)"
 if (Test-Path -PathType Container $buildDir) {
-    Write-Host "[!] Build directory for "${TEMPLATE}" already exists; aborting"
+    Write-Host "[!] Build directory for `"$($template)`" already exists; aborting"
     Write-Host "[!] Delete or move aside the build directory to continue"
     Exit $ERROR_BUSY
 }
