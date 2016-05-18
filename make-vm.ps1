@@ -60,7 +60,10 @@ if (Test-Path -PathType Container $buildDir) {
     Write-Host "[!] Delete or move aside the build directory to continue"
     Exit $ERROR_BUSY
 }
-New-Item -Type Directory $BUILD_DIR | Out-Null
-Push-Location $BUILD_DIR
-&packer build $TEMPLATE_FILE
-Pop-Location
+New-Item -Type Directory $buildDir | Out-Null
+Push-Location $buildDir
+try {
+    & packer build $templateFile
+} finally {
+    Pop-Location
+}
