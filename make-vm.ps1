@@ -9,10 +9,10 @@
 # Parse CLI arguments
 Param(
     [Parameter(Mandatory=$true)]
-    [String] $Template
+    [String] $template
 )
 
-$ROOT_DIR = Split-Path -Parent ($MyInvocation.MyCommand.Definition)
+$rootDir = Split-Path -Parent ($MyInvocation.MyCommand.Definition)
 
 # Exit statuses, modelled after Microsoft's System Error Codes
 $ERROR_ACCESS_DENIED = 5
@@ -21,7 +21,7 @@ $ERROR_BUSY          = 167
 
 # Ensure arguments are sane
 function Ensure-ArgumentsSane() {
-    if (!(Test-Path -PathType Leaf $TEMPLATE_FILE)) {
+    if (!(Test-Path -PathType Leaf $templateFile)) {
         Write-Host "[!] Template "${TEMPLATE}" does not exist in the templates directory"
         Write-Host "[!] Did you type it correctly?"
         Exit $ERROR_BAD_COMMAND
@@ -38,24 +38,24 @@ function Ensure-EnvironmentSane() {
 }
 
 # Source configuration and dependencies
-. "${ROOT_DIR}\make-vm.conf.ps1"
+. "${rootDir}\make-vm.conf.ps1"
 
 # Set up some other state before sanity checks
-$TEMPLATE_FILE = "${ROOT_DIR}\templates\${TEMPLATE}\template.json"
+$templateFile = "${rootDir}\templates\${template}\template.json"
 
 # Ensure configuration and CLI arguments are relatively sane
 Ensure-ArgumentsSane
 Ensure-EnvironmentSane
 
 # Put the Packer and VirtualBox utilities on our path to save typing
-$env:Path = "${PACKER_PATH};${VIRTUALBOX_PATH};${env:Path}"
+$env:Path = "$($PACKER_PATH);$($VIRTUALBOX_PATH);$($env:Path)"
 
 # Set Packer's cache directory outside of the build directory for faster builds
-$env:PACKER_CACHE_DIR = "${ROOT_DIR}\cache"
+$env:PACKER_CACHE_DIR = "${rootDir}\cache"
 
 # Build it
-$BUILD_DIR = "${ROOT_DIR}\builds\${TEMPLATE}"
-if (Test-Path -PathType Container $BUILD_DIR) {
+$buildDir = "${rootDir}\builds\$($template)"
+if (Test-Path -PathType Container $buildDir) {
     Write-Host "[!] Build directory for "${TEMPLATE}" already exists; aborting"
     Write-Host "[!] Delete or move aside the build directory to continue"
     Exit $ERROR_BUSY
