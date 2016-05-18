@@ -12,6 +12,10 @@ Param(
     [String] $template
 )
 
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
 $rootDir = Split-Path -Parent ($MyInvocation.MyCommand.Definition)
 
 # Exit statuses, modelled after Microsoft's System Error Codes

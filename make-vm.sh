@@ -8,6 +8,9 @@
 # @license GPL v3
 #
 
+set -euo pipefail
+IFS=$'\n\t'
+
 ROOT_DIR="$(dirname $(readlink -fn $0))"
 
 # Exit statuses, modelled after sysexits.h
@@ -88,5 +91,5 @@ if [ -d "$BUILD_DIR" ]; then
 fi
 mkdir -p "$BUILD_DIR"
 pushd "$BUILD_DIR"
-packer build "$TEMPLATE_FILE"
+packer build "$TEMPLATE_FILE" || true
 popd
