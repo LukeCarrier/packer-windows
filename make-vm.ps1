@@ -32,7 +32,7 @@ function Ensure-ArgumentsSane() {
 function Ensure-EnvironmentSane() {
     if (!(Test-Path -PathType Container $PACKER_PATH)) {
         Write-Host "[!] PACKER_PATH does not exist"
-        Write-Host "[!] Download the Packer utilities and update make-vm.conf"
+        Write-Host "[!] Download the Packer utilities and update make-vm.conf.ps1"
         Exit $ERROR_BUSY
     }
 }

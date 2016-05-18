@@ -47,7 +47,7 @@ ensure_sane_args() {
 ensure_sane_env() {
     if [ ! -d "$PACKER_PATH" ]; then
         echo "[!] PACKER_PATH does not exist"
-        echo "[!] Download the Packer utilities and update make-vm.conf"
+        echo "[!] Download the Packer utilities and update make-vm.conf.sh"
         exit $EX_UNAVAILABLE
     fi
 }
