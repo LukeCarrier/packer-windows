@@ -13,12 +13,13 @@
             "communicator": "winrm",
             "winrm_username": "vagrant",
             "winrm_password": "vagrant",
-            "winrm_timeout": "10m",
+            "winrm_timeout": "10h",
             "floppy_files": [
                 "../../templates/{{user `template`}}/Autounattend.xml",
-                "../../scripts/core/pspolicy.bat",
-                "../../scripts/core/updates.bat",
-                "../../scripts/core/winrm.bat"
+                "../../scripts/core/boxstarter.execute.ps1",
+                "../../scripts/core/boxstarter.install.ps1",
+                "../../scripts/core/boxstarter.package.ps1",
+                "../../scripts/core/pspolicy.cmd"
             ],
             "shutdown_command": "C:\\Windows\\System32\\Sysprep\\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /shutdown",
             "shutdown_timeout": "1h",

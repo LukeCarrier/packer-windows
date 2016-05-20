@@ -82,20 +82,20 @@
             </AutoLogon>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c A:\pspolicy.bat</CommandLine>
+                    <CommandLine>cmd.exe /c A:\pspolicy.cmd</CommandLine>
                     <Description>Set PowerShell execution policy</Description>
                     <Order>1</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c A:\updates.bat</CommandLine>
-                    <Description>Configure Windows Update</Description>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.install.ps1 -ExecutionPolicy Bypass</CommandLine>
+                    <Description>Install Boxstarter</Description>
                     <Order>2</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c A:\winrm.bat</CommandLine>
-                    <Description>Enable WinRM</Description>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.execute.ps1 -ExecutionPolicy Bypass</CommandLine>
+                    <Description>Install Boxstarter package</Description>
                     <Order>3</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
@@ -141,5 +141,4 @@
             <EnableLUA>false</EnableLUA>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="catalog:f:/sources/install_windows server 2008 r2 serverstandard.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
