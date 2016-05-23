@@ -1,5 +1,12 @@
+if (Test-Path C:\is_first_logon) {
+    Write-BoxstarterMessage "Rebooting system to complete profile setup"
+    Remove-Item C:\is_first_logon
+    Invoke-Reboot
+}
+
 Write-BoxstarterMessage "Prevent idle display turn off"
-& powercfg -x -monitor-timeout-dc 0
+& powercfg -change -monitor-timeout-ac 0
+& powercfg -change -monitor-timeout-dc 0
 
 Write-BoxstarterMessage "Setting PowerShell execution policy"
 Update-ExecutionPolicy RemoteSigned
