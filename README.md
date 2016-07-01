@@ -60,6 +60,16 @@ $ ./make-vm.sh --template 2008_r2_64
 > powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
 ```
 
+## Activating Windows
+
+By default, these images are built from Evaluation editions of Windows. To
+change the edition of a VM on the fly, execute the following from an elevated
+Command Prompt:
+
+```
+> DISM /online /Set-Edition:ServerStandard /AcceptEula /ProductKey:GET-YOUR-OWN
+```
+
 ## Modifying answer files
 
 Answer files are easiest to edit in the Windows System Image Manager. See
