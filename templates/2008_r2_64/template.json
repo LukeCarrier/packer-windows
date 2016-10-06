@@ -3,6 +3,7 @@
         {
             "vm_name": "{{user `template`}}",
             "type": "virtualbox-iso",
+            "headless": true,
             "format": "ova",
             "guest_os_type": "{{user `guest_os_type`}}",
             "boot_wait": "2m",
@@ -29,6 +30,9 @@
 
                 ["modifyvm", "{{.Name}}", "--videocapfile", "../../builds/2008_r2_64/capture.webm"],
                 ["modifyvm", "{{.Name}}", "--videocap",     "on"]
+            ],
+            "vboxmanage_post": [
+                ["modifyvm", "{{.Name}}", "--videocap", "off"]
             ]
         }
     ],
