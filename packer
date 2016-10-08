@@ -11,11 +11,15 @@
 set -euo pipefail
 
 ROOT_DIR="$(dirname $(readlink -fn $0))"
-BUILD_DIR="$(mktemp --directory --tmpdir="${ROOT_DIR}/builds")"
+BUILD_DIR="$(mktemp -d -p "${ROOT_DIR}/builds")"
 export PACKER_CACHE_DIR="${ROOT_DIR}/cache"
 
 ARGS=( $@ )
-[ $# -ge 2 ] && [ -f $2 ] && ARGS[1]="$(realpath $2)"
+for i in ${!ARGS[@]}; do
+    if [ -f "${ARGS[$i]}" ]; then
+        ARGS[$i]="$(realpath "${ARGS[$i]}")"
+    fi
+done
 
 pushd "$BUILD_DIR" >/dev/null
 packer ${ARGS[@]} || true

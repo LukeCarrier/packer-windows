@@ -77,8 +77,10 @@ $rootDir = Split-Path -Parent ($MyInvocation.MyCommand.Definition)
 $buildDir = New-TempDirectory -TempDir (Join-Path $rootDir "builds")
 $env:PACKER_CACHE_DIR = Join-Path $rootDir "cache"
 
-if (($args.Length -ge 2) -and (Test-Path -Type Leaf $args[1])) {
-    $args[1] = (Get-Item $args[1]).FullName
+foreach ($arg in $args) {
+    if (Test-Path -Type Leaf $arg) {
+        $args[$args.IndexOf($arg)] = (Get-Item $arg).FullName
+    }
 }
 
 Push-Location $buildDir
