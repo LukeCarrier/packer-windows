@@ -1,6 +1,6 @@
 # Vagrant Windows box factory
 
-For the poor ones amongst us who have to work with mediocre operating systems.
+Making Windows Great Again™
 
 * * *
 
