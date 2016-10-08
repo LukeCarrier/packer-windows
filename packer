@@ -11,7 +11,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(dirname $(readlink -fn $0))"
-BUILD_DIR="$(mktemp -d -p "${ROOT_DIR}/builds")"
+export PACKER_BUILD_DIR="$(mktemp -d -p "${ROOT_DIR}/builds")"
 export PACKER_CACHE_DIR="${ROOT_DIR}/cache"
 
 ARGS=( $@ )
@@ -21,6 +21,6 @@ for i in ${!ARGS[@]}; do
     fi
 done
 
-pushd "$BUILD_DIR" >/dev/null
+pushd "$PACKER_BUILD_DIR" >/dev/null
 packer ${ARGS[@]} || true
 popd >/dev/null

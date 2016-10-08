@@ -74,8 +74,8 @@ $ErrorActionPreference = "Stop"
 $VerbosePreference = "Continue"
 
 $rootDir = Split-Path -Parent ($MyInvocation.MyCommand.Definition)
-$buildDir = New-TempDirectory -TempDir (Join-Path $rootDir "builds")
 $env:PACKER_CACHE_DIR = Join-Path $rootDir "cache"
+$env:PACKER_BUILD_DIR = New-TempDirectory -TempDir (Join-Path $rootDir "builds")
 
 foreach ($arg in $args) {
     if (Test-Path -Type Leaf $arg) {
@@ -83,7 +83,7 @@ foreach ($arg in $args) {
     }
 }
 
-Push-Location $buildDir
+Push-Location $env:PACKER_BUILD_DIR
 try {
     & packer @args
 } finally {
