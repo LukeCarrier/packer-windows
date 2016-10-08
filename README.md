@@ -20,50 +20,39 @@ At this point, Windows boots, locates the answer file (`Autounattend.xml`)
 specified in the Packer configuration and performs an unattended installation.
 
 Upon rebooting, the machine executes a bootstrap script which sources files from
-the floppy disk in order to execute the first logon commands as indicated in the
-UI.
+the floppy disk in order to run the first logon commands as indicated in the UI.
 
 ## Setting up your environment
 
 Installation of a Packer build environment is simple, but a little messy:
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
-2. Grab a release for your architecture
-   [here](https://packer.io/downloads.html).
-3. Extract the release and drop it into a subdirectory of the `tools` directory.
-   directory.
-
-### On Linux
-
-Copy `make-vm.conf.sh.dist` to `make-vm.conf.sh` and alter the value of
-`PACKER_PATH` to suit.
-
-### On Windows
-
-Copy `make-vm.conf.ps1.dist` to `make-vm.conf.ps1` and alter the value of
-`PACKER_PATH` to suit.
+2. Install [Packer](https://packer.io/downloads.html).
+3. Ensure both of the above tools are on your `PATH`.
 
 ## Building a box
 
 Boxes are identified by the names of their directories under `templates`. To
-build one, you'll want to execute a command along the lines of the following:
+build one, you'll want to run a command along the lines of the following. Using
+our helper script ensures the necessary environment variables are set, and
+ensures that the relative paths in the templates can be resolved.
 
 ### On Linux
 
 ```
-$ ./make-vm.sh --template 2008_r2_64
+$ ./packer build templates/2008_r2_64/template.json
 ```
 
 ### On Windows
 
 ```
-> powershell -ExecutionPolicy RemoteSigned .\make-vm.ps1 -Template 2008_r2_64
+> .\packer.ps1 build .\templates\2008_r2_64\template.json
 ```
 
 ## Activating Windows
 
 By default, these images are built from Evaluation editions of Windows. To
-change the edition of a VM on the fly, execute the following from an elevated
+change the edition of a VM on the fly, run the following from an elevated
 Command Prompt:
 
 ```
@@ -76,8 +65,8 @@ Answer files are easiest to edit in the Windows System Image Manager. See
 [TechNet](https://technet.microsoft.com/en-GB/library/hh825494.aspx) for
 detailed installation instructions.
 
-Be sure to check that WSIM hasn't made a mess of the XML file -- just fire up a
-text editor and check the line endings and indentation and remove any
+Be sure to check that WSIM hasn't made a mess of the XML file -- just open your
+preferred editor and check the line endings and indentation and remove any
 installation source information before checking in changes. It particularly
 enjoys obscuring cleartext passwords, which is unhelpful in an open source
 environment.
