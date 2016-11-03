@@ -40,7 +40,7 @@ ensures that the relative paths in the templates can be resolved.
 ### On Linux
 
 ```
-$ ./packer build templates/2008_r2_64/template.json
+$ ./packer.sh build templates/2008_r2_64/template.json
 ```
 
 ### On Windows
