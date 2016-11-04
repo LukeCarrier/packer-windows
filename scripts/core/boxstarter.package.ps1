@@ -22,7 +22,13 @@ function Write-StageComplete {
         [string] $Stage
     )
 
-    New-Item -Type File (Get-StageCompletionFlagFilename $Stage)
+    $stageFlag = Get-StageCompletionFlagFilename $Stage
+
+    if (!(Test-Path $stageFlag.Parent.FullName)) {
+        New-Item -Type Directory $stageFlag
+    }
+
+    New-Item -Type File $stageFlag
 }
 
 if (Test-StageOutstanding "CompletedProfileSetup") {
