@@ -40,13 +40,13 @@ ensures that the relative paths in the templates can be resolved.
 ### On Linux
 
 ```
-$ ./packer.sh build templates/2008_r2_64/template.json
+$ ./packer.sh build -var-file templates/2008_r2_64/vars.json templates/windows.json
 ```
 
 ### On Windows
 
 ```
-> .\packer.ps1 build .\templates\2008_r2_64\template.json
+> .\packer.ps1 build -var-file .\templates\2008_r2_64\vars.json .\templates\windows.json
 ```
 
 ## Activating Windows
