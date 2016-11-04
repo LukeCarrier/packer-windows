@@ -18,11 +18,12 @@
             "floppy_files": [
                 "../../templates/{{user `template`}}/Autounattend.xml",
                 "../../scripts/core/pspolicy.cmd",
-                "../../scripts/core/boxstarter.execute.ps1",
                 "../../scripts/core/boxstarter.install.ps1",
-                "../../scripts/core/boxstarter.package.ps1"
+                "../../scripts/core/boxstarter.execute.ps1",
+                "../../scripts/core/boxstarter.package.ps1",
+                "../../scripts/core/shutdown.ps1"
             ],
-            "shutdown_command": "C:\\Windows\\System32\\Sysprep\\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /shutdown",
+            "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1 -ExecutionPolicy Bypass",
             "shutdown_timeout": "1h",
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "4096"],

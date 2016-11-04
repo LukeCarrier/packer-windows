@@ -61,6 +61,12 @@ if (Test-StageOutstanding "InstallWindowsUpdates") {
     Write-StageComplete "InstallWindowsUpdates"
 }
 
+if (Test-StageOutstanding "ExecuteSysprep") {
+    Write-BoxstarterMessage "Running sysprep"
+    & C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /restart
+    Write-StageComplete "ExecuteSysprep"
+}
+
 # Enable WinRM at the very end of the provisioning process, preventing Packer
 # from restarting the machine mid-way through
 if (Test-StageOutstanding "EnableWinRM") {
