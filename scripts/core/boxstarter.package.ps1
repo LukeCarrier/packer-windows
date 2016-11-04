@@ -4,7 +4,7 @@ function Get-StageCompletionFlagFilename {
         [string] $Stage
     )
 
-    return "C:\setup_flags\$($Stage)"
+    return "$($env:APPDATA)\SetupFlags\$($Stage)"
 }
 
 function Test-StageOutstanding {
@@ -24,11 +24,21 @@ function Write-StageComplete {
 
     $stageFlag = Get-StageCompletionFlagFilename $Stage
 
-    if (!(Test-Path $stageFlag.Parent.FullName)) {
-        New-Item -Type Directory $stageFlag
+    $stageFlagParent = Split-Path -Parent $stageFlag
+    if (!(Test-Path $stageFlagParent)) {
+        New-Item -Type Directory $stageFlagParent >$null
+
+        $account = [System.Security.Principal.NTAccount] "vagrant"
+
+        $acl = Get-Acl $stageFlagParent
+        $acl.SetOwner($account)
+        $acl.SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule(
+                $account, "FullControl", "Allow")))
+        $acl.SetAccessRuleProtection($true, $true)
+        Set-Acl $stageFlagParent $acl
     }
 
-    New-Item -Type File $stageFlag
+    New-Item -Type File $stageFlag >$null
 }
 
 if (Test-StageOutstanding "CompletedProfileSetup") {
