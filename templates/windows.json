@@ -40,7 +40,7 @@
     "post-processors": [
         {
             "type": "vagrant",
-            "output": "windows_{{user `template`}}{{.Provider}}.box",
+            "output": "windows_{{user `template`}}_{{.Provider}}.box",
             "vagrantfile_template": "../../templates/{{user `template`}}/vagrantfile.template"
         }
     ],
