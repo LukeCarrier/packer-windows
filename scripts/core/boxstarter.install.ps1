@@ -1,3 +1,8 @@
+Param(
+    [Parameter()]
+    [switch] $Use7Zip = $false
+)
+
 function Wait-ForNetwork {
     Param(
         [int] $maxAttempts = 32
@@ -32,6 +37,10 @@ try {
 
 if (!(Test-Path -Type Container -Path $env:Temp)) {
     New-Item -ItemType Directory -Path $env:Temp
+}
+
+if ($Use7Zip) {
+    $env:chocolateyUseWindowsCompression = 'false'
 }
 
 try {
