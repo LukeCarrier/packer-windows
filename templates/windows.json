@@ -23,7 +23,7 @@
                 "../../scripts/core/boxstarter.package.ps1",
                 "../../scripts/core/shutdown.ps1"
             ],
-            "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1 -ExecutionPolicy Bypass",
+            "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1",
             "shutdown_timeout": "1h",
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "4096"],

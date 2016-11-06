@@ -110,13 +110,13 @@
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.install.ps1 -ExecutionPolicy Bypass</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.install.ps1</CommandLine>
                     <Description>Install Boxstarter</Description>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <Order>3</Order>
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.execute.ps1 -ExecutionPolicy Bypass</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\boxstarter.execute.ps1</CommandLine>
                     <Description>Install Boxstarter package</Description>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>

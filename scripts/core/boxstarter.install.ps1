@@ -1,8 +1,3 @@
-Param(
-    [Parameter()]
-    [switch] $Use7Zip = $false
-)
-
 function Wait-ForNetwork {
     Param(
         [int] $maxAttempts = 32
