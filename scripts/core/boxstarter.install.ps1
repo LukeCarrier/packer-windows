@@ -1,3 +1,8 @@
+Param(
+    [Parameter()]
+    [switch] $Use7Zip = $false
+)
+
 function Wait-ForNetwork {
     Param(
         [int] $maxAttempts = 32
@@ -11,6 +16,7 @@ function Wait-ForNetwork {
                 | Measure-Object
 
         if ($adapters.Count -gt 0) {
+            Write-Verbose "Found adapter on attempt $($attempt + 1)"
             return
         }
 
@@ -18,14 +24,27 @@ function Wait-ForNetwork {
         Start-Sleep -Seconds 1
     } while ($attempt -lt $maxAttempts)
 
-    Write-Error "No network adapter available after $(maxAttempts) attempts"
+    throw "No network adapter available after $(maxAttempts) attempts"
 }
 
-Wait-ForNetwork
+try {
+    Wait-ForNetwork
+} catch {
+    Write-Host "Wait-ForNetwork failed; waiting for input to proceed"
+    $_.Exception | Format-List -Force
+    & powershell
+}
 
-(New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/mwrock/boxstarter/master/BuildScripts/bootstrapper.ps1") `
-        | Invoke-Expression
 if (!(Test-Path -Type Container -Path $env:Temp)) {
     New-Item -ItemType Directory -Path $env:Temp
 }
-Get-Boxstarter -Force
+
+try {
+    (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/mwrock/boxstarter/master/BuildScripts/bootstrapper.ps1") `
+            | Invoke-Expression
+    Get-Boxstarter -Force
+} catch {
+    Write-Host "Get-Boxstarter failed; waiting for input to proceed"
+    $_.Exception | Format-List -Force
+    & powershell
+}
