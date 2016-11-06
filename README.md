@@ -24,7 +24,7 @@ the floppy disk in order to run the first logon commands as indicated in the UI.
 
 ## Setting up your environment
 
-Installation of a Packer build environment is simple, but a little messy:
+Installation of a Packer build environment is simple:
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 2. Install [Packer](https://packer.io/downloads.html).
