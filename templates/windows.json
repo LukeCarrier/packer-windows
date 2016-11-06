@@ -21,9 +21,10 @@
                 "../../scripts/core/boxstarter.install.ps1",
                 "../../scripts/core/boxstarter.execute.ps1",
                 "../../scripts/core/boxstarter.package.ps1",
+                "../../scripts/core/startup-profile.ps1",
                 "../../scripts/core/shutdown.ps1"
             ],
-            "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1",
+            "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1 {{user `shutdown_args`}}",
             "shutdown_timeout": "1h",
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "4096"],
@@ -45,6 +46,7 @@
         }
     ],
     "variables": {
-        "build_dir": "{{env `PACKER_BUILD_DIR`}}"
+        "build_dir": "{{env `PACKER_BUILD_DIR`}}",
+        "shutdown_args": ""
     }
 }
