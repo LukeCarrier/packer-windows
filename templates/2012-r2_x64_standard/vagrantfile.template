@@ -1,7 +1,7 @@
 Vagrant.require_version ">= 1.6.2"
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "LukeCarrier/windows-2016-64"
+  config.vm.box = "LukeCarrier/windows_2012-r2_x64_standard"
   config.vm.box_version = "1.0.0"
 
   config.vm.guest = :windows

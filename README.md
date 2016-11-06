@@ -59,13 +59,13 @@ across editions.
 ### On Linux
 
 ```
-$ ./packer.sh build -var-file templates/2008_r2_64/vars.json templates/windows.json
+$ ./packer.sh build -var-file templates/2008-r2_x64_standard/vars.json templates/windows.json
 ```
 
 ### On Windows
 
 ```
-> .\packer.ps1 build -var-file .\templates\2008_r2_64\vars.json .\templates\windows.json
+> .\packer.ps1 build -var-file .\templates\2008-r2_x64_standard\vars.json .\templates\windows.json
 ```
 
 ## Activating Windows
