@@ -1,6 +1,6 @@
 # Vagrant Windows box factory
 
-Making Windows Great Again™
+Windows Server, as it should be out of the box.
 
 * * *
 
