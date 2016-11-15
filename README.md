@@ -6,21 +6,34 @@ Windows Server, as it should be out of the box.
 
 ## Introduction
 
-This project was born out of a last ditch attempt to escape the shackles of
-Windows and go back to working on a "nice" operating system whilst still testing
-on Windows. It builds Vagrant boxes for you.
+This project contains a set of [Packer](https://www.packer.io/) templates and
+variable files which produce Windows base boxes for Vagrant.
 
 ## How it works
 
-[Packer](https://www.packer.io/) downloads the required ISO files to the cache,
-creates a floppy image containing some key bootstrap files, creates the VM using
-the `virtualbox-iso` builder, then launches the VM with the floppy attached.
+Packer downloads the required ISO files to the cache, creates a floppy image
+containing some key bootstrap files, creates the VM using the `virtualbox-iso`
+builder, then launches the VirtualBox VM with the installation media and
+generated floppy attached.
 
-At this point, Windows boots, locates the answer file (`Autounattend.xml`)
-specified in the Packer configuration and performs an unattended installation.
+During its boot process, Windows setup reads the contents of the floppy disk
+locates the answer file (`Autounattend.xml`) and uses its contents to perform an
+unattended installation. This answer file configures automatic logon as the
+`vagrant` user.
 
-Upon rebooting, the machine executes a bootstrap script which sources files from
-the floppy disk in order to run the first logon commands as indicated in the UI.
+During the OOBE (Out Of Box Experience) process, the machine executes a series
+of bootstrap scripts which install [Boxstarter](http://boxstarter.org/).
+Boxstarter is then used to install a package across a series of reboots, which:
+
+* Reboots the machine to finalise the installation and exit the OOBE.
+* Prevents the screen from being turned off when the machine is idle.
+* Lowers the PowerShell policy to `RemoteSigned`.
+* Prevents automated installation of Windows updates.
+* Syspreps the machine.
+* Enables WinRM for remote maintenance.
+
+Once WinRM is available, Packer shuts the machine down and packages the machine
+image ready for distribution.
 
 ## Setting up your environment
 
@@ -32,10 +45,15 @@ Installation of a Packer build environment is simple:
 
 ## Building a box
 
-Boxes are identified by the names of their directories under `templates`. To
-build one, you'll want to run a command along the lines of the following. Using
-our helper script ensures the necessary environment variables are set, and
-ensures that the relative paths in the templates can be resolved.
+Two files instruct Packer on how to build our images:
+
+* The template describes the target box and the source files and commands that
+  build it.
+* Variables files contain all of the parameter values.
+
+These images are comprised of a single template (`templates/windows.json`) and
+a variables file which contains all of the values for the parameters that change
+across editions.
 
 ### On Linux
 
@@ -56,7 +74,7 @@ change the edition of a VM on the fly, run the following from an elevated
 Command Prompt:
 
 ```
-> DISM /online /Set-Edition:ServerStandard /AcceptEula /ProductKey:GET-YOUR-OWN
+> DISM /Online /Set-Edition:ServerStandard /AcceptEula /ProductKey:GET-YOUR-OWN
 ```
 
 ## Modifying answer files
