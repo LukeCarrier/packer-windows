@@ -7,7 +7,8 @@ Windows Server, as it should be out of the box.
 ## Introduction
 
 This project contains a set of [Packer](https://www.packer.io/) templates and
-variable files which produce Windows base boxes for Vagrant.
+variable files which produce Windows base boxes for
+[Vagrant](https://www.vagrantup.com/).
 
 ## How it works
 
