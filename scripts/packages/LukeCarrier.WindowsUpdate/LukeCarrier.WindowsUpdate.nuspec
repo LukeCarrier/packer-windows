@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<package>
+    <metadata>
+        <id>LukeCarrier.WindowsUpdate</id>
+        <description>Install Windows update</description>
+        <version>0.1.0</version>
+        <authors>Luke Carrier</authors>
+        <tags>Boxstarter</tags>
+    </metadata>
+</package>
