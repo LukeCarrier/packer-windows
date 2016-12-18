@@ -32,51 +32,68 @@ function Write-StageComplete {
     New-Item -Type File $stageFlag >$null
 }
 
-if (Test-StageOutstanding "CompletedProfileSetup") {
+function Execute-Stage {
+    Param(
+        [Parameter(Mandatory=$true)]
+        [string] $Stage,
+
+        [Parameter(Mandatory=$true)]
+        [ScriptBlock] $ScriptBlock,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $ForceComplete
+    )
+
+    if (Test-StageOutstanding $Stage) {
+        if ($ForceComplete) {
+            Write-StageComplete $Stage
+        }
+
+        & $ScriptBlock
+
+        Write-StageComplete $Stage
+    }
+}
+
+Execute-Stage -Stage "CompletedProfileSetup" -ForceComplete -ScriptBlock {
     Write-BoxstarterMessage "Rebooting system to complete profile setup"
-    Write-StageComplete "CompletedProfileSetup"
     Invoke-Reboot
 }
 
-if (Test-StageOutstanding "PreventIdleDisplayTurnOff") {
+Execute-Stage -Stage "PreventIdleDisplayTurnOff" -ScriptBlock {
     Write-BoxstarterMessage "Prevent idle display turn off"
     & powercfg -change -monitor-timeout-ac 0
     & powercfg -change -monitor-timeout-dc 0
-    Write-StageComplete "PreventIdleDisplayTurnOff"
 }
 
-if (Test-StageOutstanding "SetPowerShellExecutionPolicy") {
+Execute-Stage -Stage "SetPowerShellExecutionPolicy" -ScriptBlock {
     Write-BoxstarterMessage "Setting PowerShell execution policy"
     Update-ExecutionPolicy RemoteSigned
-    Write-StageComplete "SetPowerShellExecutionPolicy"
 }
 
-if (Test-StageOutstanding "SetWindowsUpdatePolicy") {
+Execute-Stage -Stage "SetWindowsUpdatePolicy" -ScriptBlock {
     Write-BoxstarterMessage "Setting update policy"
     Enable-MicrosoftUpdate
     New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" `
             -Name AUOptions -PropertyType DWord -Value 1 -Force
-    Write-StageComplete "SetWindowsUpdatePolicy"
 }
 
-if (Test-StageOutstanding "InstallWindowsUpdates") {
+Execute-Stage -Stage "InstallWindowsUpdates" -ScriptBlock {
     Write-BoxstarterMessage "Installing updates"
     Install-WindowsUpdate -AcceptEula -Criteria "IsHidden=0 and IsInstalled=0"
     if (Test-PendingReboot) {
         Invoke-Reboot
     }
-    Write-StageComplete "InstallWindowsUpdates"
 }
 
-if (Test-StageOutstanding "ExecuteSysprep") {
+Execute-Stage -Stage "ExecuteSysprep" -ScriptBlock {
     Write-BoxstarterMessage "Running sysprep"
     & C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /restart
-    Write-StageComplete "ExecuteSysprep"
 }
 
 # Enable WinRM at the very end of the provisioning process, preventing Packer
 # from restarting the machine mid-way through
-if (Test-StageOutstanding "EnableWinRM") {
+Execute-Stage -Stage "EnableWinRM" -ScriptBlock {
     Write-BoxstarterMessage "Enabling WinRM"
     Enable-PSRemoting -Force
 
@@ -87,6 +104,4 @@ if (Test-StageOutstanding "EnableWinRM") {
     Set-Item -Path WSMan:\localhost\Shell\MaxMemoryPerShellMB -Value 2048
 
     Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
-
-    Write-StageComplete "EnableWinRM"
 }
