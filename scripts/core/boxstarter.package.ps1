@@ -27,15 +27,6 @@ function Write-StageComplete {
     $stageFlagParent = Split-Path -Parent $stageFlag
     if (!(Test-Path $stageFlagParent)) {
         New-Item -Type Directory $stageFlagParent >$null
-
-        $account = [System.Security.Principal.NTAccount] "vagrant"
-
-        $acl = Get-Acl $stageFlagParent
-        $acl.SetOwner($account)
-        $acl.SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule(
-                $account, "FullControl", "Allow")))
-        $acl.SetAccessRuleProtection($true, $true)
-        Set-Acl $stageFlagParent $acl
     }
 
     New-Item -Type File $stageFlag >$null
