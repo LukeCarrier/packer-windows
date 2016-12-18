@@ -88,7 +88,7 @@ Execute-Stage -Stage "InstallWindowsUpdates" -ScriptBlock {
 
 Execute-Stage -Stage "ExecuteSysprep" -ScriptBlock {
     Write-BoxstarterMessage "Running sysprep"
-    & C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /unattend:A:\\Autounattend.xml /quiet /restart
+    & C:\Windows\System32\Sysprep\sysprep.exe /generalize /quit /unattend:A:\\Autounattend.xml /quiet
 }
 
 Execute-Stage -Stage "DisableAutomaticLogon" -ScriptBlock {
