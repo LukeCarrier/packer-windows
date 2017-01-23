@@ -99,7 +99,7 @@ altering `Autounattend.xml` accordingly.
 
 The default ISOs are as follows:
 
-| Windows version | ISO URL | Cache filename  |
+| Windows version | ISO URL | Cache filename |
 | --- | --- | --- |
 | 2008 R2 x64 | http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso | `75e529d96d6b175622512cf0a1bc55a5d1677e6a9d3b913fe95c65b6aa41770d.iso` |
 | 2012 R2 x64 | http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO | `0fa2380dae2e2178d3dcbd7475d35a9133fd0d61cad4fa1f87a2a83f358a3c8b.iso` |
