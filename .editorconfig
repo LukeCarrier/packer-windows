@@ -4,10 +4,17 @@ root = true
 charset = utf-8
 insert_final_newline = true
 
-[*.{bat,json,md,ps1,xml}]
+[*.md]
 end_of_line = lf
 indent_style = space
 indent_size = 4
+trim_trailing_whitespace = false
+
+[*.{bat,json,ps1,xml}]
+end_of_line = lf
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
 
 [vagrantfile.template]
 end_of_line = lf
