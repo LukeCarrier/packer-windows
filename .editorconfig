@@ -10,7 +10,7 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = false
 
-[*.{bat,json,ps1,xml}]
+[*.{ahk,bat,json,ps1,xml}]
 end_of_line = lf
 indent_style = space
 indent_size = 4
