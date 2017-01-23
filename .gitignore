@@ -3,3 +3,6 @@
 
 # Packer image cache
 /cache/
+
+# ADK working directory
+/adk/catalogs/
