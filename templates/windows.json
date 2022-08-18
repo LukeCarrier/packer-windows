@@ -1,22 +1,61 @@
 {
   "builders": [
     {
-      "vm_name": "{{user `template`}}",
       "type": "virtualbox-iso",
-      "headless": true,
+      "vm_name": "{{user `template`}}",
+
       "format": "ova",
       "guest_os_type": "{{user `guest_os_type`}}",
       "boot_wait": "2m",
-      "iso_url": "{{user `iso_url`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "md5",
+      "headless": true,
+
       "guest_additions_mode": "attach",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--videocapfile",
+          "{{user `build_dir`}}/capture.webm"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--videocap",
+          "on"
+        ]
+      ],
+      "vboxmanage_post": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--videocap",
+          "off"
+        ]
+      ],
+
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "md5:{{user `iso_checksum`}}",
+
+      "host_port_max": 5985,
+      "host_port_min": 5985,
+
       "communicator": "winrm",
+      "winrm_timeout": "10h",
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
-      "ssh_host_port_min": 5985,
-      "ssh_host_port_max": 5985,
-      "winrm_timeout": "10h",
+
       "floppy_files": [
         "../../templates/{{user `template`}}/Autounattend.xml",
         "../../scripts/core/pspolicy.cmd",
@@ -26,24 +65,15 @@
         "../../scripts/core/startup-profile.ps1",
         "../../scripts/core/shutdown.ps1"
       ],
-      "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1 {{user `shutdown_args`}}",
-      "shutdown_timeout": "1h",
-      "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "4096"],
-        ["modifyvm", "{{.Name}}", "--cpus",   "2"],
 
-        ["modifyvm", "{{.Name}}", "--videocapfile", "{{user `build_dir`}}/capture.webm"],
-        ["modifyvm", "{{.Name}}", "--videocap",   "on"]
-      ],
-      "vboxmanage_post": [
-        ["modifyvm", "{{.Name}}", "--videocap", "off"]
-      ]
+      "shutdown_command": "cmd.exe /c C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -File A:\\shutdown.ps1 {{user `shutdown_args`}}",
+      "shutdown_timeout": "1h"
     }
   ],
   "post-processors": [
     {
-      "type": "vagrant",
       "output": "windows_{{user `template`}}_{{.Provider}}.box",
+      "type": "vagrant",
       "vagrantfile_template": "../../templates/{{user `template`}}/vagrantfile.template"
     }
   ],
