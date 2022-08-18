@@ -79,3 +79,4 @@ The default ISOs are as follows:
 | 2008 R2 x64 | http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso | `75e529d96d6b175622512cf0a1bc55a5d1677e6a9d3b913fe95c65b6aa41770d.iso` |
 | 2012 R2 x64 | http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO | `0fa2380dae2e2178d3dcbd7475d35a9133fd0d61cad4fa1f87a2a83f358a3c8b.iso` |
 | 2016 x64 | http://care.dlservice.microsoft.com/dl/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO | `524abd34eb2abcc5e5a12da5b1c97fa3a6a626a831c29b4e74801f4131fb08ed.iso` |
+| 2019 x63 | https://software-download.microsoft.com/download/sg/17763.379.190312-0539.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso | `` |
