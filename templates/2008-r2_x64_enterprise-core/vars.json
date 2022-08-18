@@ -1,7 +1,7 @@
 {
-    "guest_os_type": "Windows2008_64",
-    "iso_url": "http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso",
-    "iso_checksum": "4263be2cf3c59177c45085c0a7bc6ca5",
-    "template": "2008-r2_x64_enterprise-core",
-    "shutdown_args": "-UseStartupWorkaround"
+  "guest_os_type": "Windows2008_64",
+  "iso_url": "http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso",
+  "iso_checksum": "4263be2cf3c59177c45085c0a7bc6ca5",
+  "template": "2008-r2_x64_enterprise-core",
+  "shutdown_args": "-UseStartupWorkaround"
 }

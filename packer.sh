@@ -18,9 +18,9 @@ echo "Building in ${PACKER_BUILD_DIR} using cache ${PACKER_CACHE_DIR}..."
 
 ARGS=( $@ )
 for i in ${!ARGS[@]}; do
-    if [ -f "${ARGS[$i]}" ]; then
-        ARGS[$i]="$(realpath "${ARGS[$i]}")"
-    fi
+  if [ -f "${ARGS[$i]}" ]; then
+    ARGS[$i]="$(realpath "${ARGS[$i]}")"
+  fi
 done
 
 pushd "$PACKER_BUILD_DIR" >/dev/null
