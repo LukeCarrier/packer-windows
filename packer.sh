@@ -11,8 +11,10 @@
 set -euo pipefail
 
 ROOT_DIR="$(dirname $(readlink -fn $0))"
-export PACKER_BUILD_DIR="$(mktemp -d -p "${ROOT_DIR}/builds")"
+BUILD_DIR="${ROOT_DIR}/builds"
+export PACKER_BUILD_DIR="$(mktemp -d "${BUILD_DIR}/bld.XXXXXXXX")"
 export PACKER_CACHE_DIR="${ROOT_DIR}/cache"
+echo "Building in ${PACKER_BUILD_DIR} using cache ${PACKER_CACHE_DIR}..."
 
 ARGS=( $@ )
 for i in ${!ARGS[@]}; do
