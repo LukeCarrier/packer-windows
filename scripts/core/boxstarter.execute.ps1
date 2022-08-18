@@ -3,6 +3,7 @@ Param(
   [switch] $UseStartupWorkaround = $false
 )
 
+. (Join-Path $env:ProgramData "BoxStarter\BoxstarterShell.ps1")
 Import-Module Boxstarter.Chocolatey
 
 function Install-StartupWorkaround {
