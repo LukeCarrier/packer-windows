@@ -12,36 +12,25 @@
       "guest_additions_mode": "attach",
       "vboxmanage": [
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "4096"
+          "modifyvm", "{{.Name}}",
+          "--memory", "4096",
+          "--cpus", "2"
         ],
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--videocapfile",
-          "{{user `build_dir`}}/capture.webm"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--videocap",
-          "on"
+          "modifyvm", "{{.Name}}",
+          "--recordingscreens", "0",
+          "--recordingvideores", "1024x768",
+          "--recordingvideorate", "512",
+          "--recordingvideofps", "25",
+          "--recordingfile", "{{user `build_dir`}}/capture.webm",
+          "--recordingopts", "vc_enabled=true,ac_enabled=true,ac_profile=med",
+          "--recording", "on"
         ]
       ],
       "vboxmanage_post": [
         [
-          "modifyvm",
-          "{{.Name}}",
-          "--videocap",
-          "off"
+          "modifyvm", "{{.Name}}",
+          "--recording", "off"
         ]
       ],
 
