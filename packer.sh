@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-ROOT_DIR="$(dirname $(readlink -fn $0))"
+ROOT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 BUILD_DIR="${ROOT_DIR}/builds"
 export PACKER_BUILD_DIR="$(mktemp -d "${BUILD_DIR}/bld.XXXXXXXX")"
 export PACKER_CACHE_DIR="${ROOT_DIR}/cache"
