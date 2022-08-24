@@ -20,10 +20,12 @@ During the OOBE (Out Of Box Experience) process, the machine executes a series o
 - Prevents the screen from being turned off when the machine is idle.
 - Lowers the PowerShell policy to `RemoteSigned`.
 - Prevents automated installation of Windows updates.
-- Syspreps the machine.
 - Enables WinRM for remote maintenance.
+- Generalises the image with Sysprep during shutdown.
 
 Once WinRM is available, Packer shuts the machine down and packages the machine image ready for distribution.
+
+The OOBE will be skipped on subsequent boots, but automatic logon will be disabled.
 
 ## Setting up your environment
 

@@ -86,25 +86,6 @@ Execute-Stage -Stage "InstallWindowsUpdates" -ScriptBlock {
   }
 }
 
-Execute-Stage -Stage "ExecuteSysprep" -ScriptBlock {
-  Write-BoxstarterMessage "Running sysprep"
-  & C:\Windows\System32\Sysprep\sysprep.exe /generalize /quit /unattend:A:\\Autounattend.xml /quiet
-}
-
-Execute-Stage -Stage "DisableAutomaticLogon" -ScriptBlock {
-  Write-BoxstarterMessage "Disabling automatic logon"
-
-  @(
-    "AutoAdminLogon",
-    "DefaultDomainName",
-    "DefaultUserName"
-  ) | ForEach-Object {
-    Remove-ItemProperty `
-        -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" `
-        -Name $_ -Force
-  }
-}
-
 # Enable WinRM at the very end of the provisioning process, preventing Packer
 # from restarting the machine mid-way through
 Execute-Stage -Stage "EnableWinRM" -ScriptBlock {
