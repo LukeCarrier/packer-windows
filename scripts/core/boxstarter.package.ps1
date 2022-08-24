@@ -1,4 +1,4 @@
-function Get-StageCompletionFlagFilename {
+function Get-StageSentinel {
   Param(
     [Parameter(Mandatory=$true)]
     [string] $Stage
@@ -7,29 +7,29 @@ function Get-StageCompletionFlagFilename {
   return "$($env:APPDATA)\SetupFlags\$($Stage)"
 }
 
-function Test-StageOutstanding {
+function Test-StageSentinel {
   Param(
     [Parameter(Mandatory=$true)]
     [string] $Stage
   )
 
-  return !(Test-Path (Get-StageCompletionFlagFilename $Stage))
+  return !(Test-Path (Get-StageSentinel $Stage))
 }
 
-function Write-StageComplete {
+function Write-StageSentinel {
   Param(
     [Parameter(Mandatory=$true)]
     [string] $Stage
   )
 
-  $stageFlag = Get-StageCompletionFlagFilename $Stage
+  $stageSentinel = Get-StageSentinel $Stage
 
-  $stageFlagParent = Split-Path -Parent $stageFlag
-  if (!(Test-Path $stageFlagParent)) {
-    New-Item -Type Directory $stageFlagParent >$null
+  $stageSentinelParent = Split-Path -Parent $stageSentinel
+  if (!(Test-Path $stageSentinelParent)) {
+    New-Item -Type Directory $stageSentinelParent >$null
   }
 
-  New-Item -Type File $stageFlag >$null
+  New-Item -Type File $stageSentinel >$null
 }
 
 function Execute-Stage {
@@ -44,14 +44,14 @@ function Execute-Stage {
     [switch] $ForceComplete
   )
 
-  if (Test-StageOutstanding $Stage) {
+  if (Test-StageSentinel $Stage) {
     if ($ForceComplete) {
-      Write-StageComplete $Stage
+      Write-StageSentinel $Stage
     }
 
     & $ScriptBlock
 
-    Write-StageComplete $Stage
+    Write-StageSentinel $Stage
   }
 }
 
