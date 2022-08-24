@@ -40,18 +40,18 @@ Two files instruct Packer on how to build our images:
 - The template describes the target box and the source files and commands that build it.
 - Variables files contain all of the parameter values.
 
-These images are comprised of a single template (`templates/windows.json`) and a variables file which contains all of the values for the parameters that change across editions.
+These images are comprised of a single template (`templates/windows.pkr.hcl`) and a variables file which contains all of the values for the parameters that change across editions.
 
 ### On Linux
 
 ```console
-./packer.sh build -var-file templates/2008-r2_x64_standard/vars.json templates/windows.json
+./packer.sh build -var-file templates/2008-r2_x64_standard/vars.pkrvars.hcl templates/windows.pkr.hcl
 ```
 
 ### On Windows
 
 ```console
-.\packer.ps1 build -var-file .\templates\2008-r2_x64_standard\vars.json .\templates\windows.json
+.\packer.ps1 build -var-file .\templates\2008-r2_x64_standard\vars.pkrvars.hcl .\templates\windows.pkr.hcl
 ```
 
 ## Activating Windows
