@@ -74,6 +74,7 @@ source "virtualbox-iso" "windows_server" {
 
   floppy_files = [
     "../../templates/${var.template}/Autounattend.xml",
+    "../../templates/${var.template}/Autounattend.generalize.xml",
     "../../scripts/core/pspolicy.cmd",
     "../../scripts/core/boxstarter.install.ps1",
     "../../scripts/core/boxstarter.execute.ps1",

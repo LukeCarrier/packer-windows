@@ -1,6 +1,8 @@
 Param(
   [Parameter()]
-  [switch] $UseStartupWorkaround = $false
+  [switch] $UseStartupWorkaround = $false,
+  [Parameter()]
+  [string] $Sysprep = "C:\Windows\system32\Sysprep\sysprep.exe"
 )
 
 if ($UseStartupWorkaround) {
@@ -12,6 +14,18 @@ if ($UseStartupWorkaround) {
   Remove-Item -Force $PROFILE
 }
 
+Write-Host "Removing sentinels"
 Remove-Item -Force -Recurse "$($env:APPDATA)\SetupFlags"
 
-Stop-Computer -Force
+$sysprepUnattend = "A:\Autounattend.generalize.xml"
+$sysprepArgs = @(
+  "/generalize", "/oobe",
+  "/unattend:$SysprepUnattend",
+  "/shutdown",
+  "/quiet"
+)
+Write-Host "Invoking sysprep $Sysprep with arguments $sysprepArgs"
+Start-Process `
+  -Wait `
+  -FilePath $Sysprep `
+  -ArgumentList $sysprepArgs
