@@ -111,9 +111,9 @@ Execute-Stage -Stage "EnableWinRM" -ScriptBlock {
   Write-BoxstarterMessage "Enabling WinRM"
   Enable-PSRemoting -Force
 
-  Set-Item -Path WSMan:\localhost\MaxTimeoutms       -Value 1800000
+  Set-Item -Path WSMan:\localhost\MaxTimeoutms             -Value 1800000
   Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value True
-  Set-Item -Path WSMan:\localhost\Service\Auth\Basic     -Value True
+  Set-Item -Path WSMan:\localhost\Service\Auth\Basic       -Value True
 
   Set-Item -Path WSMan:\localhost\Shell\MaxMemoryPerShellMB -Value 2048
 
