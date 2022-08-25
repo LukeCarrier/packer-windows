@@ -17,6 +17,16 @@ if ($UseStartupWorkaround) {
 Write-Host "Removing sentinels"
 Remove-Item -Force -Recurse "$($env:APPDATA)\SetupFlags"
 
+Write-Host "Logging off users"
+Invoke-CimMethod `
+    -ComputerName $env:ComputerName `
+    -ClassName Win32_Operatingsystem `
+    -MethodName Win32Shutdown `
+    -Arguments @{ Flags = 4 }
+
+Write-Host "Removing vagrant user"
+Remove-LocalUser -Name vagrant
+
 $sysprepUnattend = "E:\Autounattend.generalize.xml"
 $sysprepArgs = @(
   "/generalize", "/oobe",
