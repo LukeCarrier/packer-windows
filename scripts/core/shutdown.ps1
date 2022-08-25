@@ -17,7 +17,7 @@ if ($UseStartupWorkaround) {
 Write-Host "Removing sentinels"
 Remove-Item -Force -Recurse "$($env:APPDATA)\SetupFlags"
 
-$sysprepUnattend = "A:\Autounattend.generalize.xml"
+$sysprepUnattend = "E:\Autounattend.generalize.xml"
 $sysprepArgs = @(
   "/generalize", "/oobe",
   "/unattend:$SysprepUnattend",

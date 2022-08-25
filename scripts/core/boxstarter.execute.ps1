@@ -16,7 +16,7 @@ function Install-StartupWorkaround {
     New-Item -Type Directory $profileDir
   }
 
-  Copy-Item -Force A:\startup-profile.ps1 $PROFILE
+  Copy-Item -Force E:\startup-profile.ps1 $PROFILE
 }
 
 if ($UseStartupWorkaround) {
@@ -27,7 +27,7 @@ if ($UseStartupWorkaround) {
 $credential = New-Object System.Management.Automation.PSCredential(
     "vagrant", (ConvertTo-SecureString -String "vagrant" -AsPlainText -Force))
 $result = Install-BoxstarterPackage `
-    -PackageName A:\boxstarter.package.ps1 -Credential $credential
+    -PackageName E:\boxstarter.package.ps1 -Credential $credential
 
 if ($result.Errors.Count) {
   Write-Host "Install-BoxstarterPackage encountered errors; waiting for input to proceed"
