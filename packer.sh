@@ -9,6 +9,13 @@
 #
 
 set -euo pipefail
+shopt -s nullglob
+
+PARALLELS_FRAMEWORK="/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python"
+if [[ "$OSTYPE" == "darwin"* ]] && [[ -d "$PARALLELS_FRAMEWORK" ]]; then
+  echo 'Putting Parallels Python SDK on PYTHONPATH'
+  export PYTHONPATH="$(echo "$PARALLELS_FRAMEWORK"/3.*)"
+fi
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 BUILD_DIR="${ROOT_DIR}/builds"
