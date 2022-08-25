@@ -34,6 +34,7 @@ Installation of a Packer build environment is simple:
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 2. Install [Packer](https://packer.io/downloads.html).
 3. Ensure both of the above tools are on your `PATH`.
+4. Install dependencies with `packer init windows.pkr.hcl`.
 
 ## Building a box
 
@@ -42,18 +43,45 @@ Two files instruct Packer on how to build our images:
 - The template describes the target box and the source files and commands that build it.
 - Variables files contain all of the parameter values.
 
-These images are comprised of a single template (`templates/windows.pkr.hcl`) and a variables file which contains all of the values for the parameters that change across editions.
+These images are comprised of a single template (`windows.pkr.hcl`) and a variables file which contains all of the values for the parameters that change across editions.
 
 ### On Linux
 
 ```console
-./packer.sh build -var-file templates/2008-r2_x64_standard/vars.pkrvars.hcl templates/windows.pkr.hcl
+./packer.sh build \
+    -only virtualbox-iso.windows_server \
+    -var-file templates/2019_x64_standard/vars.pkrvars.hcl \
+    windows.pkr.hcl
+```
+
+### On macOS
+
+With Parallels:
+
+```console
+brew install --cask parallels-virtualization-sdk
+./packer.sh build \
+    -only parallels-iso.windows_server \
+    -var-file templates/2019_x64_standard/vars.pkrvars.hcl \
+    windows.pkr.hcl
+```
+
+With VirtualBox:
+
+```console
+./packer.sh build \
+    -only virtualbox-iso.windows_server \
+    -var-file templates/2019_x64_standard/vars.pkrvars.hcl \
+    windows.pkr.hcl
 ```
 
 ### On Windows
 
 ```console
-.\packer.ps1 build -var-file .\templates\2008-r2_x64_standard\vars.pkrvars.hcl .\templates\windows.pkr.hcl
+.\packer.ps1 build `
+    -only virtualbox-iso.windows_server \
+    -var-file .\templates\2019_x64_standard\vars.pkrvars.hcl `
+    .\windows.pkr.hcl
 ```
 
 ## Activating Windows
