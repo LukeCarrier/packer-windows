@@ -1,7 +1,13 @@
 Param(
   [Parameter()]
+  [switch] $SetSecurityProtocol = $false,
+  [Parameter()]
   [switch] $Use7Zip = $false
 )
+
+if ($SetSecurityProtocol) {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+}
 
 function Wait-ForNetwork {
   Param(
