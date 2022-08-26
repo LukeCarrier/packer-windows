@@ -144,8 +144,6 @@ source "virtualbox-iso" "windows_server" {
     "<enter>",
   ]
   boot_wait = "10s"
-  host_port_max = 5985
-  host_port_min = 5985
 
   communicator   = local.communicator.communicator
   winrm_timeout  = local.communicator.winrm_timeout
